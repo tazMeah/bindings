@@ -9,6 +9,72 @@
 <body>
     <outer></outer>
 
+    <h3>index.html</h3>
+    <pre>
+    &lt;!DOCTYPE html&gt;
+    &lt;html lang="en" ng-app="myApp"&gt;
+        &lt;head&gt;
+            &lt;meta charset="UTF-8"&gt;
+            &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+            &lt;meta http-equiv="X-UA-Compatible" content="ie=edge"&gt;
+            &lt;title&gt;Document&lt;/title&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+            &lt;outer&gt;&lt;/outer&gt;
+
+            &lt;script src="https://code.angularjs.org/1.6.5/angular.min.js"&gt;&lt;/script&gt;
+            &lt;script src="module.js"&gt;&lt;/script&gt;
+            &lt;script src="outer.js"&gt;&lt;/script&gt;
+            &lt;script src="inner.js"&gt;&lt;/script&gt;
+        &lt;/body&gt;
+    &lt;/html&gt;
+    </pre>
+
+    <h3>module.js</h3>
+    <pre>
+    "use strict";
+
+    var app = angular.module("myApp", [])
+    </pre>
+
+    <h3>outer.js</h3>
+    <pre>
+    "use strict";
+
+    const outer = {
+        template: `
+        &lt;inner outer-f="$ctrl.outerF();"&gt;&lt;/inner&gt;
+        `,
+        controller: function() {
+            const vm = this;
+            vm.outerF = function(){
+                console.log("The method is in the outer component. The button is in the inner component.");
+            }
+            
+        }
+    
+    };
+    
+    app.component("outer", outer)
+    </pre>
+
+    <h3>inner.js</h3>
+    <pre>
+    "use strict";
+
+    const inner = {
+        bindings: {
+            outerF: "&"
+        },
+        template: `
+        &lt;button type="button" ng-click="$ctrl.outerF()"&gt;Button in Inner Component&lt;/button&gt;
+        `
+        
+    
+    };
+    
+    app.component("inner", inner)
+    </pre>
     <script src="https://code.angularjs.org/1.6.5/angular.min.js"></script>
     <script src="module.js"></script>
     <script src="outer.js"></script>

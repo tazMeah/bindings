@@ -6,10 +6,8 @@ const inner = {
     },
     template: `
     <button type="button" ng-click="$ctrl.outerF()">Button in Inner Component</button>
-    `,
-    controller: function() {
-
-    }
+    `
+   
 
 };
 
